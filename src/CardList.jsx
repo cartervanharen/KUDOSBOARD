@@ -1,20 +1,22 @@
 import './global.css'
+import { useState, useEffect } from "react";
 
 
-const CardList = () => {
- 
+const CardList = ({sortoption}) => {
+  const [currentsortmethod, setCurrentsortmethod] = useState("");
 
+  useEffect(() => {
+    setCurrentsortmethod(sortoption);
+  }, [sortoption]);
+
+  console.log(currentsortmethod);
 
   return (
     <>
-
-<p>test123
-</p>
-
+      <p>{currentsortmethod}</p>
     </>
   );
 };
-
 
 
 export default CardList;

@@ -1,18 +1,65 @@
 #wholepage{
 
-  width: 100%;
+  background-color: gray;
+
+  width: 100vw;
+
+  color:white;
+  height: 100vw;
+  margin: 0;
+
 }
 
 #mainheader{
-  display: flex;
+  top: -30px; /*MIGHT NEED TO REMOVE WHEN HOSING*/
   width: 100%;
-  text-align: centers;
+  padding-top: 30px;
+  background-color: black;
+  text-align: center;
   justify-content: center;
-  background-color: gray;
-
-
+  position: relative;
+  padding-bottom: 10px;
 
 }
 
 
+#headertext{
+  color: white;
+  padding: 0px;
+  margin: 0px;
+  animation: pulse 2s infinite; 
+}
+@keyframes pulse {
+  0% {
+    color: white;
+  }
+  50% {
+    color: red;
+  }
+  100% {
+    color: white;
+  }
+}
 
+.standardbutton{
+  background-color: black;
+  border-color: #00aaff;
+  color:#00aaff;
+  border-width: 2px;
+  border-style: solid;
+  height: 40px;
+  padding: 5px;
+  margin: 5px;
+}
+
+.standardbutton:hover {
+  background-color: black;
+  border-color: red;
+
+  color:red;
+  border-width: 2px;
+  border-style: solid;
+  height: 40px;
+  padding: 5px;
+  margin: 5px;
+}
