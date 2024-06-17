@@ -2,18 +2,12 @@ import "./global.css";
 import CardList from "./CardList.jsx";
 import { useState } from "react";
 
-
 function App() {
-
   const [SortMethod, setSortMethod] = useState("");
 
-
-  const selectrecent = () => {
-    setSortMethod("recent");
-    }
-
-
-
+  const handleButtonClick = (sortMethod) => {
+    setSortMethod(sortMethod);
+  };
 
   return (
     <>
@@ -22,27 +16,23 @@ function App() {
           <h1 id="headertext">KUDOBOARD</h1>
 
           <div>
-            <button className="standardbutton">All</button>
+            <button className="standardbutton" onClick={() => handleButtonClick("all")}>All</button>
 
-            <button className="standardbutton">Recent</button>
+            <button className="standardbutton" onClick={() => handleButtonClick("recent")}>Recent</button>
 
-            <button className="standardbutton" onClick={selectrecent}>Celebration</button>
+            <button className="standardbutton" onClick={() => handleButtonClick("celly")}>
+              Celebration
+            </button>
 
-            <button className="standardbutton">Thank You</button>
+            <button className="standardbutton" onClick={() => handleButtonClick("thanks")}>Thank You</button>
 
-            <button className="standardbutton">Inspiration</button>
+            <button className="standardbutton" onClick={() => handleButtonClick("inspiration")}>Inspiration</button>
           </div>
 
-
-          <button className="standardbutton">New Board</button>
-
-
+          <button className="standardbutton" >New Board</button>
         </div>
 
-        <CardList sortoption={SortMethod}/>
-
-
-
+        <CardList sortoption={SortMethod} />
       </div>
     </>
   );
