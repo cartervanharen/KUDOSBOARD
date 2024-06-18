@@ -12,3 +12,21 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Card {
+  id          Int       @id @default(autoincrement())
+  type        String
+  title       String
+  message     String
+  author      String
+  comments    Comment[] // Relation field, one-to-many
+}
+
+model Comment {
+  id              Int    @id @default(autoincrement())
+  commentAuthor   String
+  comment         String
+  commentLocation String
+  cardId          Int    // Foreign key
+  card            Card   @relation(fields: [cardId], references: [id]) // Relation field
+}
