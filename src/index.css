@@ -26,7 +26,7 @@ body {
   margin: 0;
 
   min-width: 800px;
-  width:100%;
+  width: 100%;
   padding: 0;
   margin: 0;
   min-height: 100vh;
@@ -47,7 +47,7 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: color 0.5s;
-  transition: border-color .8s;
+  transition: border-color 0.8s;
 }
 button:hover {
   border-color: #646cff;

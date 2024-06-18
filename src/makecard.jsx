@@ -13,9 +13,8 @@ const MakeCard = (props) => {
   //   };
 
   return (
-
     <div className="cardbox">
-        {/* {console.log(props.url)} */}
+      {/* {console.log(props.url)} */}
       <img className="imageincard" src={props.url} />
       <p>{props.title}</p>
       <div>
@@ -30,13 +29,10 @@ const MakeCard = (props) => {
 };
 
 MakeCard.propTypes = {
-
   title: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
   cardtype: PropTypes.string.isRequired,
-//   id: PropTypes.string.isRequired,
-
-
+  //   id: PropTypes.string.isRequired,
 };
 
 export default MakeCard;

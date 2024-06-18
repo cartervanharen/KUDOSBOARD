@@ -1,36 +1,48 @@
 import React, { useState } from "react";
 import "./global.css";
+import {
+  fetchAllCards,
+  fetchAllBoards,
+  fetchAllUsers,
+  addUser,
+  deleteCard,
+  deleteBoard,
+  addCard,
+  addBoard,
+  getUserFromBoardId,
+  getBoardsFromUserId,
+  getCardsFromUserId,
+} from "./dbcalls";
 
 const Modal = ({ closeModal }) => {
   const [formData, setFormData] = useState({
     title: "",
-    Category: "",
+    image: "",
+    type: "",
   });
 
-  const initialFormData = {
-    title: "",
-    Category: "",
-  };
-
   const handleChange = (e) => {
-    const { title, Category } = e.target;
-    addBoard();
-
+    const { name, value } = e.target;
     setFormData((prevState) => ({
       ...prevState,
       [name]: value,
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setFormData(initialFormData);
+    const userId = 1;
+    await addBoard(formData.type, formData.title, formData.image, userId);
+    console.log("Form Data Submitted:", formData);
+    setFormData({
+      title: "",
+      image: "",
+      type: "",
+    });
     closeModal();
 
-    console.log("Form Data Submitted:", formData);
+    window.location.reload(); //band aid fix
   };
-
-  const userRoles = ["Recent", "Celebration", "Thank You", "Inspiration"];
 
   return (
     <div className="modalnewcard-backdrop">
@@ -56,19 +68,29 @@ const Modal = ({ closeModal }) => {
           </div>
 
           <div>
-            <label htmlFor="Category">Category: </label>
+            <label htmlFor="image">Image Url: </label>
+            <input
+              type="text"
+              id="image"
+              name="image"
+              value={formData.image}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div>
+            <label htmlFor="type">Type: </label>
             <select
-              id="Category"
-              name="Category"
-              value={formData.Category}
+              id="type"
+              name="type"
+              value={formData.type}
               onChange={handleChange}
             >
-              <option value="">Select a Category</option>
-              {userRoles.map((role) => (
-                <option key={role} value={role}>
-                  {role}
-                </option>
-              ))}
+              <option value="">Select a Type</option>
+              <option value="Recent">Recent</option>
+              <option value="Celebration">Celebration</option>
+              <option value="Thank You">Thank You</option>
+              <option value="Inspiration">Inspiration</option>
             </select>
           </div>
           <button type="submit">Submit</button>

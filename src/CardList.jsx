@@ -17,7 +17,7 @@ import {
 } from "./dbcalls";
 
 const CardList = ({ sortoption }) => {
-  const [boards, setBoards] = useState([]); // Renamed to boards for clarity
+  const [boards, setBoards] = useState([]);
   const [currentSortMethod, setCurrentSortMethod] = useState("");
 
   useEffect(() => {
@@ -30,8 +30,8 @@ const CardList = ({ sortoption }) => {
 
   useEffect(() => {
     const fetchBoards = async () => {
-      const fetchedBoards = await fetchAllBoards(); // Correctly await the fetching of boards
-      setBoards(fetchedBoards); // Set the fetched boards
+      const fetchedBoards = await fetchAllBoards();
+      setBoards(fetchedBoards);
     };
     fetchBoards();
   }, []);
@@ -39,13 +39,13 @@ const CardList = ({ sortoption }) => {
   return (
     <>
       <div id="listofcards">
-        {boards.map((board) => ( // Correctly map over boards
+        {boards.map((board) => (
           <MakeCard
-            key={board.id} // Ensure the key is correctly using board.id
+            key={board.id}
             url={board.image}
             title={board.title}
             cardtype={board.type}
-            message={board.message} // Ensure the board object has a message property, or adjust as needed
+            message={board.message}
           />
         ))}
       </div>

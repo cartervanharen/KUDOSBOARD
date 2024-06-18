@@ -7,7 +7,6 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Fetch all users
 app.get("/users", async (req, res) => {
   try {
     const users = await prisma.users.findMany({
@@ -22,7 +21,6 @@ app.get("/users", async (req, res) => {
   }
 });
 
-// Fetch all cards
 app.get("/cards", async (req, res) => {
   try {
     const cards = await prisma.card.findMany();
@@ -32,7 +30,6 @@ app.get("/cards", async (req, res) => {
   }
 });
 
-// Add a new user
 app.post("/users", async (req, res) => {
   const { name } = req.body;
   try {
@@ -45,7 +42,6 @@ app.post("/users", async (req, res) => {
   }
 });
 
-// Add a new card
 app.post("/cards", async (req, res) => {
   const { userId, boardId, cardtitle, carddescription, image } = req.body;
   try {
@@ -58,7 +54,6 @@ app.post("/cards", async (req, res) => {
   }
 });
 
-// Delete a card
 app.delete("/cards/:id", async (req, res) => {
   const { id } = req.params;
   try {
@@ -71,7 +66,6 @@ app.delete("/cards/:id", async (req, res) => {
   }
 });
 
-// Add a new board
 app.post("/boards", async (req, res) => {
   const { type, title, image, userId } = req.body;
   try {
@@ -84,7 +78,6 @@ app.post("/boards", async (req, res) => {
   }
 });
 
-// Delete a board
 app.delete("/boards/:id", async (req, res) => {
   const { id } = req.params;
   try {
@@ -97,13 +90,12 @@ app.delete("/boards/:id", async (req, res) => {
   }
 });
 
-// Fetch all boards
 app.get("/boards", async (req, res) => {
   try {
     const boards = await prisma.board.findMany({
       include: {
-        user: true, // Include the user details associated with each board
-        cards: true, // Include the cards associated with each board
+        user: true,
+        cards: true,
       },
     });
     res.json(boards);
@@ -112,7 +104,6 @@ app.get("/boards", async (req, res) => {
   }
 });
 
-// Delete a user
 app.delete("/users/:id", async (req, res) => {
   const { id } = req.params;
   try {
@@ -124,7 +115,6 @@ app.delete("/users/:id", async (req, res) => {
     res.status(500).json({ error: "Failed to delete user" });
   }
 });
-// Get User ID from Card ID
 app.get("/cards/:id/user", async (req, res) => {
   const { id } = req.params;
   try {
@@ -142,7 +132,6 @@ app.get("/cards/:id/user", async (req, res) => {
   }
 });
 
-// Get User from Board ID
 app.get("/boards/:id/user", async (req, res) => {
   const { id } = req.params;
   try {
@@ -160,7 +149,6 @@ app.get("/boards/:id/user", async (req, res) => {
   }
 });
 
-// Get Cards from User ID
 app.get("/users/:id/cards", async (req, res) => {
   const { id } = req.params;
   try {
@@ -173,7 +161,6 @@ app.get("/users/:id/cards", async (req, res) => {
   }
 });
 
-// Get Boards from User ID
 app.get("/users/:id/boards", async (req, res) => {
   const { id } = req.params;
   try {
