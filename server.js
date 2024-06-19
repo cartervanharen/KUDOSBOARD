@@ -79,6 +79,7 @@ app.post("/boards", async (req, res) => {
 });
 
 app.delete("/boards/:id", async (req, res) => {
+  console.log("trying to delete")
   const { id } = req.params;
   try {
     await prisma.board.delete({

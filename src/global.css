@@ -2,13 +2,13 @@
   background-color: gray;
 
   width: 100vw;
-
+  min-height: 300vw;
   color: white;
   margin: 0;
 }
 
 #mainheader {
-  top: -30px; /*MIGHT NEED TO REMOVE WHEN HOSING*/
+  top: -50px; /*MIGHT NEED TO REMOVE WHEN HOSING*/
   width: 100%;
   padding-top: 30px;
   background-color: black;
@@ -67,7 +67,7 @@
   border-style: solid;
   border-color: black;
   color: black;
-
+  display: flex;
   background-color: white;
   width: 210px;
   height: 350px;
@@ -89,10 +89,10 @@
 .imageincard {
   padding-top: 10px;
   display: block;
-  margin-left: auto;
-  border-radius: 10px;
+  /* margin-left: auto; */
+  border-radius: 30px;
 
-  margin-right: auto;
+  /* margin-right: auto; */
   height: 180px;
   width: 160px;
 }

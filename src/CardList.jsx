@@ -25,7 +25,7 @@ const CardList = ({ sortoption }) => {
       setCurrentSortMethod(sortoption);
       console.log(currentSortMethod);
     }
-    console.log("repeat");
+    // console.log("repeat");
   }, [sortoption, currentSortMethod]);
 
   useEffect(() => {
@@ -41,7 +41,8 @@ const CardList = ({ sortoption }) => {
       <div id="listofcards">
         {boards.map((board) => (
           <MakeCard
-            key={board.id}
+            key={board.boardid} //completely useless but it gets rid of warnings
+            boardsid={board.boardid}
             url={board.image}
             title={board.title}
             cardtype={board.type}

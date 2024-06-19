@@ -1,16 +1,33 @@
 import "./global.css";
 import PropTypes from "prop-types";
+import {
+  fetchAllCards,
+  fetchAllBoards,
+  fetchAllUsers,
+  addUser,
+  deleteCard,
+  deleteBoard,
+  addCard,
+  addBoard,
+  getUserFromBoardId,
+  getBoardsFromUserId,
+  getCardsFromUserId,
+} from "./dbcalls";
 
 const MakeCard = (props) => {
-  //   const handleLikeClick = (event) => {
-  //     event.stopPropagation();
-  //     props.onLike();
-  //   };
+  // const handleLikeClick = (event) => {
+  //   event.stopPropagation();
+  //   props.onLike();
 
-  //   const handleWatchedClick = (event) => {
-  //     event.stopPropagation();
-  //     props.onWatched();
-  //   };
+  // };
+
+  const deletebuttonclick = (event) => {
+    event.stopPropagation();
+    deleteBoard(props.boardsid);
+    window.location.reload(); //Change this eventually
+
+
+  };
 
   return (
     <div className="cardbox">
@@ -22,7 +39,9 @@ const MakeCard = (props) => {
 
         <button className="standardbutton">View Board </button>
 
-        <button className="standardbutton">Delete</button>
+        <button className="standardbutton" onClick={deletebuttonclick}>
+          Delete
+        </button>
       </div>
     </div>
   );
@@ -31,6 +50,7 @@ const MakeCard = (props) => {
 MakeCard.propTypes = {
   title: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
+  boardsid: PropTypes.number.isRequired,
   cardtype: PropTypes.string.isRequired,
   //   id: PropTypes.string.isRequired,
 };
