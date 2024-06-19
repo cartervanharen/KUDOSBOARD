@@ -22,6 +22,7 @@ const Modal = ({ closeModal }) => {
   });
 
   const handleChange = (e) => {
+
     const { name, value } = e.target;
     setFormData((prevState) => ({
       ...prevState,
@@ -40,7 +41,6 @@ const Modal = ({ closeModal }) => {
       type: "",
     });
     closeModal();
-
     window.location.reload(); //band aid fix
   };
 
