@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+
 import { useNavigate } from "react-router-dom"; 
 import {
   fetchAllCards,
@@ -23,7 +24,7 @@ const MakeCard = (props) => {
     event.stopPropagation();
     deleteAllCardsFromBoard(props.boardsid);
     deleteBoard(props.boardsid);
-    window.location.reload();
+window.location.reload();
   };
 
   const viewBoard = (event) => {

@@ -15,7 +15,7 @@ import {
   getUserFromBoardId,
   getBoardsFromUserId,
   getCardsFromUserId,
-} from "./dbcalls";
+} from "./dbcalls.jsx";
 
 const CardList = ({ sortoption }) => {
   const [boards, setBoards] = useState([]);

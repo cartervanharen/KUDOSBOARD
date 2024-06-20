@@ -1,19 +1,9 @@
+// Board.js
 import React, { useState, useEffect } from "react";
-import CardModal from "./newcardmodal"; 
-import {
-  fetchAllCards,
-  fetchAllBoards,
-  fetchAllUsers,
-  addUser,
-  deleteCard,
-  deleteBoard,
-  addCard,
-  addBoard,
-  getUserFromBoardId,
-  getBoardsFromUserId,
-  getCardsFromUserId,
-  getCardsFromBoardId,
-} from "./dbcalls";
+import CardModal from "./newcardmodal";
+import Makeinnercard from "./makeinnercard"; 
+import { getCardsFromBoardId } from "./dbcalls";
+
 const Board = ({ board }) => {
   const [cards, setCards] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -44,17 +34,7 @@ const Board = ({ board }) => {
       <div className="flexboxforcards">
         <h2>Cards</h2>
         {cards.length > 0 ? (
-          cards.map((card) => (
-            <div className="gridcardinboard" key={card.cardid}>
-              <h3>{card.cardtitle}</h3>
-              <p>{card.carddescription}</p>
-              <img
-                src={card.image}
-                alt={card.cardtitle}
-                style={{ width: "100px", height: "100px" }}
-              />
-            </div>
-          ))
+          cards.map((card) => <Makeinnercard key={card.cardid} card={card} />)
         ) : (
           <p>No cards available for this board.</p>
         )}

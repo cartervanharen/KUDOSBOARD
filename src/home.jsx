@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./global.css";
-import CardList from "./CardList.jsx";
+import CardList from "./BoardList.jsx";
 import NewCardModal from "./newboardmodal.jsx";
 
 function Home() {
