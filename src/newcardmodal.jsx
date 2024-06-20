@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { addCard } from "./dbcalls";
-import "./global.css"; // Ensure this path is correct
+import "./global.css"; 
 
 const CardModal = ({ closeModal, boardId }) => {
   const [formData, setFormData] = useState({

@@ -28,7 +28,6 @@ const Modal = ({ closeModal }) => {
     const url = `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${searchTerm}&limit=15`;
     const response = await fetch(url);
     const { data } = await response.json();
-    console.log(data);
     setGifs(data);
   };
 

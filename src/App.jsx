@@ -21,8 +21,6 @@ function App() {
 
   const value = localStorage.getItem("test");
 
-  console.log(value); 
-
   const [boards, setBoards] = useState([]);
 
   useEffect(() => {
@@ -32,7 +30,6 @@ function App() {
     }
     fetchBoards();
   }, []);
-  console.log(boards);
   return (
     <Router>
       <Routes>

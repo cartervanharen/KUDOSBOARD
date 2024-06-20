@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import CardModal from "./newcardmodal"; // Import the CardModal component
+import CardModal from "./newcardmodal"; 
 import {
   fetchAllCards,
   fetchAllBoards,
