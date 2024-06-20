@@ -9,7 +9,8 @@ datasource db {
 
 model Users {
   userid Int     @id @default(autoincrement())
-  name   String
+  username   String @default("guest")
+  password String @default("guest")
   cards  Card[]
   boards Board[]
 }

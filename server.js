@@ -99,7 +99,6 @@ app.delete("/boards/:boardId", async (req, res) => {
     res.status(204).send();
   } catch (error) {
     console.error("Error deleting board:", error);
-    res.status(500).json({ error: "Failed to delete board" });
   }
 });
 
