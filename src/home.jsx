@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import "./global.css";
 import CardList from "./CardList.jsx";
-import NewCardModal from "./newcardmodal.jsx";
-
-import { fetchAllUsers, addUser, deleteCard } from "./dbcalls.jsx";
-
-// console.log(fetchAllUsers());
+import NewCardModal from "./newboardmodal.jsx";
 
 function Home() {
   const [SortMethod, setSortMethod] = useState("");

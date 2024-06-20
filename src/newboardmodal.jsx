@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { addCard } from "./dbcalls";
-import "./global.css"; // Ensure this path is correct
+import "./global.css";
+import { addBoard } from "./dbcalls";
 
-const CardModal = ({ closeModal, boardId }) => {
+const Modal = ({ closeModal }) => {
   const [formData, setFormData] = useState({
-    cardtitle: "",
-    carddescription: "",
+    title: "",
     image: "",
+    type: "",
   });
   const [searchTerm, setSearchTerm] = useState("");
   const [gifs, setGifs] = useState([]);
@@ -28,6 +28,7 @@ const CardModal = ({ closeModal, boardId }) => {
     const url = `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${searchTerm}&limit=15`;
     const response = await fetch(url);
     const { data } = await response.json();
+    console.log(data);
     setGifs(data);
   };
 
@@ -42,61 +43,60 @@ const CardModal = ({ closeModal, boardId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const userId = 1;
-    const likes = 0;
-    await addCard(
-      userId,
-      boardId,
-      formData.cardtitle,
-      formData.carddescription,
-      formData.image,
-      likes
-    );
+
+    await addBoard(formData.type, formData.title, formData.image, userId);
+    setFormData({
+      title: "",
+      image: "",
+      type: "",
+    });
     closeModal();
-    window.location.reload();
+    window.location.reload(); 
   };
 
   return (
-    <div className="modal-backdrop">
-      <div className="modal-content">
-        <button className="close-button" onClick={closeModal}>
+    <div className="modalnewcard-backdrop">
+      <div className="modalnewcard-content">
+        <button className="modalnewcardclose-button" onClick={closeModal}>
           X
         </button>
         <h2>Create New Card</h2>
+        <p>
+          Your card will be created under a guest account if you don't sign in.
+        </p>
+
         <form onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="cardtitle">Title: </label>
+            <label htmlFor="title">Title: </label>
             <input
               type="text"
-              id="cardtitle"
-              name="cardtitle"
+              id="title"
+              name="title"
               required
-              value={formData.cardtitle}
+              maxLength={18}
+              value={formData.title}
               onChange={handleChange}
             />
           </div>
-          <div>
-            <label htmlFor="carddescription">Description: </label>
-            <input
-              type="text"
-              id="carddescription"
-              name="carddescription"
-              required
-              value={formData.carddescription}
-              onChange={handleChange}
-            />
-          </div>
+
           <div>
             <label htmlFor="search">Search Giphy: </label>
             <input
               type="text"
               id="search"
               value={searchTerm}
+              required
               onChange={handleSearchChange}
             />
-            <button type="button" onClick={searchGifs}>
+            <button
+              style={{ margin: "10px" }}
+              type="button"
+              onClick={searchGifs}
+            >
               Search
             </button>
           </div>
+
           <div>
             {gifs.map((gif) => (
               <img
@@ -108,22 +108,40 @@ const CardModal = ({ closeModal, boardId }) => {
               />
             ))}
           </div>
+
           <div>
-            <label htmlFor="image">Image URL: </label>
+            <label htmlFor="image">Image Url: </label>
             <input
               type="text"
               id="image"
-              name="image"
               required
+              name="image"
               value={formData.image}
               onChange={handleChange}
             />
           </div>
-          <button type="submit">Create Card</button>
+
+          <div>
+            <label htmlFor="type">Type: </label>
+            <select
+              id="type"
+              required
+              name="type"
+              value={formData.type}
+              onChange={handleChange}
+            >
+              <option value="">Select a Type</option>
+              <option value="Recent">Recent</option>
+              <option value="Celebration">Celebration</option>
+              <option value="Thank You">Thank You</option>
+              <option value="Inspiration">Inspiration</option>
+            </select>
+          </div>
+          <button type="submit">Submit</button>
         </form>
       </div>
     </div>
   );
 };
 
-export default CardModal;
+export default Modal;

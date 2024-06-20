@@ -46,7 +46,14 @@ const deleteBoard = async (boardId) => {
   }
 };
 
-const addCard = async (userId, boardId, cardtitle, carddescription, image) => {
+const addCard = async (
+  userId,
+  boardId,
+  cardtitle,
+  carddescription,
+  image,
+  likes
+) => {
   try {
     const response = await axios.post("http://localhost:3001/cards", {
       userId,
@@ -54,6 +61,7 @@ const addCard = async (userId, boardId, cardtitle, carddescription, image) => {
       cardtitle,
       carddescription,
       image,
+      likes,
     });
   } catch (error) {
     console.error("Error adding card:", error);
@@ -135,9 +143,35 @@ const fetchAllBoards = async () => {
   }
 };
 
+const getCardsFromBoardId = async (boardId) => {
+  try {
+    const response = await axios.get(
+      `http://localhost:3001/boards/${boardId}/cards`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching cards from board ID:", error);
+    return []; 
+  }
+};
+
+const deleteAllCardsFromBoard = async (boardId) => {
+  try {
+    const response = await axios.delete(
+      `http://localhost:3001/boards/${boardId}/cards`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting all cards from board ID:", error);
+    return null;
+  }
+};
+
 export {
   fetchAllCards,
   fetchAllBoards,
+  deleteAllCardsFromBoard,
+  getCardsFromBoardId,
   fetchAllUsers,
   addUser,
   deleteUser,

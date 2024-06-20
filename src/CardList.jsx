@@ -8,6 +8,7 @@ import {
   fetchAllUsers,
   addUser,
   deleteCard,
+  deleteAllCardsFromBoard,
   deleteBoard,
   addCard,
   addBoard,
@@ -25,7 +26,6 @@ const CardList = ({ sortoption }) => {
       setCurrentSortMethod(sortoption);
       console.log(currentSortMethod);
     }
-    // console.log("repeat");
   }, [sortoption, currentSortMethod]);
 
   useEffect(() => {

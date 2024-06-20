@@ -43,14 +43,25 @@ app.post("/users", async (req, res) => {
 });
 
 app.post("/cards", async (req, res) => {
-  const { userId, boardId, cardtitle, carddescription, image } = req.body;
+  const { userId, boardId, cardtitle, carddescription, image, likes } =
+    req.body;
   try {
     const card = await prisma.card.create({
-      data: { userId, boardId, cardtitle, carddescription, image },
+      data: {
+        userId: parseInt(userId),
+        boardId: parseInt(boardId),
+        cardtitle,
+        carddescription,
+        image,
+        likes,
+      },
     });
     res.json(card);
   } catch (error) {
-    res.status(500).json({ error: "Failed to add card" });
+    console.error("Failed to add card:", error);
+    res
+      .status(500)
+      .json({ error: "Failed to add card", details: error.message });
   }
 });
 
@@ -63,6 +74,32 @@ app.delete("/cards/:id", async (req, res) => {
     res.status(204).send();
   } catch (error) {
     res.status(500).json({ error: "Failed to delete card" });
+  }
+});
+
+app.delete("/boards/:boardId/cards", async (req, res) => {
+  const { boardId } = req.params;
+  try {
+    await prisma.card.deleteMany({
+      where: { boardId: parseInt(boardId) },
+    });
+    res.status(204).send();
+  } catch (error) {
+    console.error("Error deleting cards from board ID:", error);
+    res.status(500).json({ error: "Failed to delete cards from board ID" });
+  }
+});
+
+app.delete("/boards/:boardId", async (req, res) => {
+  const { boardId } = req.params;
+  try {
+    await prisma.board.delete({
+      where: { boardid: parseInt(boardId) },
+    });
+    res.status(204).send();
+  } catch (error) {
+    console.error("Error deleting board:", error);
+    res.status(500).json({ error: "Failed to delete board" });
   }
 });
 
@@ -79,7 +116,7 @@ app.post("/boards", async (req, res) => {
 });
 
 app.delete("/boards/:id", async (req, res) => {
-  console.log("trying to delete")
+  console.log("trying to delete");
   const { id } = req.params;
   try {
     await prisma.board.delete({
@@ -171,6 +208,18 @@ app.get("/users/:id/boards", async (req, res) => {
     res.json(boards);
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch boards from user ID" });
+  }
+});
+
+app.get("/boards/:boardId/cards", async (req, res) => {
+  const { boardId } = req.params;
+  try {
+    const cards = await prisma.card.findMany({
+      where: { boardId: parseInt(boardId) },
+    });
+    res.json(cards);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch cards from board ID" });
   }
 });
 

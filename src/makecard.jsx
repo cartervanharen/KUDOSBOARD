@@ -1,5 +1,6 @@
-import "./global.css";
+import React from "react";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom"; // Import useNavigate instead of useHistory
 import {
   fetchAllCards,
   fetchAllBoards,
@@ -12,33 +13,34 @@ import {
   getUserFromBoardId,
   getBoardsFromUserId,
   getCardsFromUserId,
+  deleteAllCardsFromBoard,
 } from "./dbcalls";
 
 const MakeCard = (props) => {
-  // const handleLikeClick = (event) => {
-  //   event.stopPropagation();
-  //   props.onLike();
-
-  // };
+  const navigate = useNavigate();
 
   const deletebuttonclick = (event) => {
     event.stopPropagation();
+    deleteAllCardsFromBoard(props.boardsid);
     deleteBoard(props.boardsid);
-    window.location.reload(); //Change this eventually
+    window.location.reload();
+  };
 
-
+  const viewBoard = (event) => {
+    event.stopPropagation();
+    const linkUrl = `/boards/${props.boardsid}`;
+    navigate(linkUrl);
   };
 
   return (
     <div className="cardbox">
-      {/* {console.log(props.url)} */}
-      <img className="imageincard" src={props.url} />
+      <img className="imageincard" src={props.url} alt={props.title} />
       <p>{props.title}</p>
-      <div>
+      <div className="cardbuttonsbottom">
         <p>{props.cardtype}</p>
-
-        <button className="standardbutton">View Board </button>
-
+        <button className="standardbutton" onClick={viewBoard}>
+          View Board
+        </button>
         <button className="standardbutton" onClick={deletebuttonclick}>
           Delete
         </button>
@@ -52,7 +54,6 @@ MakeCard.propTypes = {
   url: PropTypes.string.isRequired,
   boardsid: PropTypes.number.isRequired,
   cardtype: PropTypes.string.isRequired,
-  //   id: PropTypes.string.isRequired,
 };
 
 export default MakeCard;

@@ -33,6 +33,8 @@ model Card {
   cardtitle       String
   carddescription String
   image           String
+  likes Int
+  
 
   user  Users @relation(fields: [userId], references: [userid]) //many to 1
   Board Board @relation(fields: [boardId], references: [boardid])
