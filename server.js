@@ -152,6 +152,7 @@ app.delete("/users/:id", async (req, res) => {
     res.status(500).json({ error: "Failed to delete user" });
   }
 });
+
 app.get("/cards/:id/user", async (req, res) => {
   const { id } = req.params;
   try {
@@ -166,6 +167,46 @@ app.get("/cards/:id/user", async (req, res) => {
     }
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch user ID from card ID" });
+  }
+});
+
+app.post("/cards/:id/like", async (req, res) => {
+  const { id } = req.params;
+  const { likes } = req.body;
+
+  try {
+    const updatedCard = await prisma.card.update({
+      where: { cardid: parseInt(id) },
+      data: { likes },
+    });
+    res.json(updatedCard);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to update likes" });
+  }
+});
+
+app.get("/cards/:id/likes", async (req, res) => {
+  const { id } = req.params;
+  try {
+    // Ensure the id is a valid number
+    const cardId = parseInt(id);
+    if (isNaN(cardId)) {
+      return res.status(400).json({ error: "Invalid card ID" });
+    }
+
+    const card = await prisma.card.findUnique({
+      where: { cardid: cardId },
+      select: { likes: true },
+    });
+
+    if (card) {
+      res.json({ likes: card.likes });
+    } else {
+      res.status(404).json({ error: "Card not found" });
+    }
+  } catch (error) {
+    console.error("Failed to fetch likes:", error); // Log the error for debugging
+    res.status(500).json({ error: "Failed to fetch likes from card ID" });
   }
 });
 

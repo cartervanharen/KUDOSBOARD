@@ -114,14 +114,24 @@ const getBoardsFromUserId = async (userId) => {
     console.error("Error fetching boards from user ID:", error);
   }
 };
-const getCardsFromUserId = async (userId) => {
+const getCardsFromUserId = async (userid) => {
   try {
-    const response = await axios.get(
-      `http://localhost:3001/users/${userId}/cards`
-    );
+    const response = await axios.get(`http://localhost:3001/cards/${userid}/`);
     return response.data;
   } catch (error) {
     console.error("Error fetching cards from user ID:", error);
+  }
+};
+
+const getLikesFromCard = async (cardId) => {
+  try {
+    const response = await axios.get(
+      `http://localhost:3001/cards/${cardId}/likes`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching likes from card ID:", error);
+    return null;
   }
 };
 
@@ -151,7 +161,7 @@ const getCardsFromBoardId = async (boardId) => {
     return response.data;
   } catch (error) {
     console.error("Error fetching cards from board ID:", error);
-    return []; 
+    return [];
   }
 };
 
@@ -167,6 +177,21 @@ const deleteAllCardsFromBoard = async (boardId) => {
   }
 };
 
+const addLikeToCard = async (cardId, newLikeCount) => {
+  try {
+    const response = await axios.post(
+      `http://localhost:3001/cards/${cardId}/like`,
+      {
+        likes: newLikeCount,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error adding like to card:", error);
+    return null;
+  }
+};
+
 export {
   fetchAllCards,
   fetchAllBoards,
@@ -178,9 +203,11 @@ export {
   deleteCard,
   deleteBoard,
   addCard,
+  getLikesFromCard,
   addBoard,
   getUserIdFromCardId,
   getBoardsFromUserId,
   getUserFromBoardId,
   getCardsFromUserId,
+  addLikeToCard,
 };

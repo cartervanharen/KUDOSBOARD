@@ -1,7 +1,7 @@
 // Board.js
 import React, { useState, useEffect } from "react";
 import CardModal from "./newcardmodal";
-import Makeinnercard from "./makeinnercard"; 
+import Makeinnercard from "./makeinnercard";
 import { getCardsFromBoardId } from "./dbcalls";
 
 const Board = ({ board }) => {
@@ -25,14 +25,15 @@ const Board = ({ board }) => {
   const closeModal = () => setIsModalOpen(false);
 
   return (
-    <div>
+    <div className="wholeboardpage">
       <h1>{board.boardid}</h1>
       <p style={{ color: "black" }}>{board.type}</p>
       <p style={{ color: "black" }}>{board.userId}</p>
       <p style={{ color: "black" }}>{board.image}</p>
+
       <button onClick={openModal}>Create New Card</button>
+      <br></br>
       <div className="flexboxforcards">
-        <h2>Cards</h2>
         {cards.length > 0 ? (
           cards.map((card) => <Makeinnercard key={card.cardid} card={card} />)
         ) : (

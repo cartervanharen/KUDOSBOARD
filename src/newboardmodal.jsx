@@ -51,7 +51,7 @@ const Modal = ({ closeModal }) => {
       type: "",
     });
     closeModal();
-    window.location.reload(); 
+    window.location.reload();
   };
 
   return (

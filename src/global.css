@@ -131,15 +131,19 @@
 }
 .gridcardinboard {
   background-color: gray;
-  width: 200px;
   padding: 10px;
+  justify-content: center;
+  text-align: center;
+
   margin: 10px;
+
   border-radius: 10px;
   color: white;
 }
 
 .flexboxforcards {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .modal-backdrop {
@@ -172,4 +176,16 @@ input[type="text"] {
   box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+.cardimage {
+  border-radius: 5px;
+
+  width: 150px;
+  height: 150px;
+}
+
+.wholeboardpage {
+  width: 100vp;
+  background-color: pink;
 }
