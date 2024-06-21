@@ -27,7 +27,7 @@ const MakeCard = (props) => {
 
     setTimeout(async () => {
       window.location.reload();
-    }, 1200);
+    }, 1500);
   };
 
   const viewBoard = (event) => {

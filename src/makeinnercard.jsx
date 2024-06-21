@@ -1,40 +1,53 @@
 import React, { useState, useEffect } from "react";
-import { deleteCard, getLikesFromCard, addLikeToCard,getCommentsByCardId } from "./dbcalls";
-import CardModal from './commentmodal.jsx';
+import { deleteCard, getLikesFromCard, addLikeToCard } from "./dbcalls";
+import CardModal from "./commentmodal.jsx";
 
 const MakeInnerCard = ({ card }) => {
-  const [likes, setLikes] = useState(null);
+  const [likes, setLikes] = useState(0);
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const fetchLikes = async () => {
-      const fetchedLikes = await getLikesFromCard(card.cardid);
-      setLikes(fetchedLikes.likes);
+      try {
+        const fetchedLikes = await getLikesFromCard(card.cardid);
+        setLikes(fetchedLikes.likes);
+      } catch (error) {
+        console.error("Failed to fetch likes:", error);
+      }
     };
 
     fetchLikes();
   }, [card.cardid]);
 
-  const deleteButtonClick = (event) => {
+  const deleteButtonClick = async (event) => {
     event.stopPropagation();
+    await deleteCard(card.cardid);
 
-    setTimeout(async () => {
-      await deleteCard(card.cardid);
-      window.location.reload();
-    }, 400);
+    console.log(card.cardid)
+
+    // setTimeout(async () => {
+    //   window.location.reload();
+    // }, 1500);
   };
 
-  const likeclick = async (event) => {
+  const likeClick = async (event) => {
     event.stopPropagation();
-    const newLikes = likes + 1;
-    await addLikeToCard(card.cardid, newLikes);
-    setLikes(newLikes);
+    try {
+      const newLikes = likes + 1;
+      await addLikeToCard(card.cardid, newLikes);
+      setLikes(newLikes);
+    } catch (error) {
+      console.error("Failed to add like:", error);
+    }
   };
 
   const handleCardClick = () => {
     setShowModal(true);
   };
 
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
 
   return (
     <div className="gridcardinboard" key={card.cardid} onClick={handleCardClick}>
@@ -43,14 +56,10 @@ const MakeInnerCard = ({ card }) => {
       <p>Likes: {likes}</p>
       <img src={card.image} alt={card.cardtitle} className="cardimage" />
       <div>
-        <button className="standardbutton" onClick={likeclick}>
-          Like
-        </button>
-        <button className="standardbutton" onClick={deleteButtonClick}>
-          Delete
-        </button>
+        <button className="standardbutton" onClick={likeClick}>Like</button>
+        <button className="standardbutton" onClick={deleteButtonClick}>Delete</button>
       </div>
-      {showModal && <CardModal card={card} onClose={() => setShowModal(false)} />}
+      {showModal && <CardModal card={card} onClose={handleCloseModal} />}
     </div>
   );
 };
