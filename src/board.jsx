@@ -6,7 +6,7 @@ import { getCardsFromBoardId } from "./dbcalls";
 import { useNavigate } from "react-router-dom";
 
 const Board = ({ board }) => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [cards, setCards] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,26 +29,28 @@ const Board = ({ board }) => {
 
   const gohome = (event) => {
     event.stopPropagation();
-    navigate('/'); 
+    navigate("/");
   };
 
   return (
     <div className="wholeboardpage">
-      <button onClick={gohome}>Home</button>
+      <div className="headerboard">
+        <p className="headertextboards">{board.title}</p>
 
-      <h1>{board.boardid}</h1>
+        <button className="headerbutton" onClick={gohome}>
+          Home
+        </button>
+        <button className="headerbuttonwide" onClick={openModal}>
+          New Card
+        </button>
+      </div>
 
-      <p style={{ color: "black" }}>{board.type}</p>
-      <p style={{ color: "black" }}>{board.userId}</p>
-      <p style={{ color: "black" }}>{board.image}</p>
-
-      <button onClick={openModal}>Create New Card</button>
       <br></br>
       <div className="flexboxforcards">
         {cards.length > 0 ? (
           cards.map((card) => <Makeinnercard key={card.cardid} card={card} />)
         ) : (
-          <p>No cards available for this board.</p>
+          <p style={{ padding: "50px" }}>No cards available for this board.</p>
         )}
       </div>
 

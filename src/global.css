@@ -1,8 +1,10 @@
 #wholepage {
   background-color: gray;
-
+  height: 100%;
+  min-height: 100vw;
   width: 100vw;
-    color: white;
+  color: white;
+  overflow: scroll;
   margin: 0;
 }
 
@@ -129,7 +131,7 @@
   margin-bottom: 10px;
 }
 .gridcardinboard {
-  background-color: gray;
+  background-color: black;
   padding: 10px;
   justify-content: center;
   text-align: center;
@@ -185,9 +187,56 @@ input[type="text"] {
 }
 
 .wholeboardpage {
+  padding: 10px;
   width: 100vw;
 
   overflow-y: scroll;
   height: 100%;
-  background-color: pink;
+  min-height: 100vw;
+  width: 100vw;
+  background-color: white;
+}
+
+.headerboard {
+  background-color: black;
+  height: 90px;
+  width: 80%;
+  display: flex;
+
+  border-radius: 8px;
+  margin: 10px;
+  padding: 10px;
+  color: white;
+  font-size: 20pt;
+}
+
+.headerbutton {
+  font-size: 18px !important;
+  justify-self: center;
+  height: 40px;
+  width: 100px;
+  margin: 10px;
+}
+
+.headertextboards {
+  text-align: center;
+  margin: 0;
+  padding: 10px;
+  overflow-wrap: break-word;
+}
+.headerbuttonwide {
+  font-size: 18px !important;
+  justify-self: center;
+  padding: auto;
+  height: 40px;
+  width: 130px;
+  min-width: 130px;
+  margin: 10px;
+}
+
+.carddiscrip {
+  width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

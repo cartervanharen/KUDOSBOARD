@@ -131,7 +131,6 @@ const Modal = ({ closeModal }) => {
               onChange={handleChange}
             >
               <option value="">Select a Type</option>
-              <option value="Recent">Recent</option>
               <option value="Celebration">Celebration</option>
               <option value="Thank You">Thank You</option>
               <option value="Inspiration">Inspiration</option>

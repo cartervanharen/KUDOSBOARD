@@ -31,8 +31,8 @@ const MakeInnerCard = ({ card }) => {
 
   return (
     <div className="gridcardinboard" key={card.cardid}>
-      <h3>{card.cardtitle}</h3>
-      <p>{card.carddescription}</p>
+      <h3 className="carddiscrip">{card.cardtitle}</h3>
+      <p className="carddiscrip">{card.carddescription}</p>
       <p>Likes: {likes}</p>
       <img src={card.image} alt={card.cardtitle} className="cardimage" />
       <div>

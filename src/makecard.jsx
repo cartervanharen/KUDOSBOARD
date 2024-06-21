@@ -22,12 +22,12 @@ const MakeCard = (props) => {
 
   const deletebuttonclick = (event) => {
     event.stopPropagation();
+    deleteAllCardsFromBoard(props.boardsid);
+    deleteBoard(props.boardsid);
 
     setTimeout(async () => {
-      deleteAllCardsFromBoard(props.boardsid);
-      deleteBoard(props.boardsid);
       window.location.reload();
-    }, 800);
+    }, 1200);
   };
 
   const viewBoard = (event) => {

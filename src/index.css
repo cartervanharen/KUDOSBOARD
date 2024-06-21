@@ -10,7 +10,6 @@
   font-synthesis: none;
   text-rendering: optimizeLegibility;
 
-  
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -31,7 +30,6 @@ body {
   width: 100%;
   padding: 0;
   margin: 0;
-
 }
 
 h1 {

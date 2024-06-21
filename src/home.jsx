@@ -21,20 +21,48 @@ function Home() {
         <div id="mainheader">
           <h1 id="headertext">KUDOBOARD</h1>
           <div>
-            <button className="standardbutton" onClick={() => handleButtonClick("all")}>All</button>
-            <button className="standardbutton" onClick={() => handleButtonClick("recent")}>Recent</button>
-            <button className="standardbutton" onClick={() => handleButtonClick("celly")}>Celebration</button>
-            <button className="standardbutton" onClick={() => handleButtonClick("thanks")}>Thank You</button>
-            <button className="standardbutton" onClick={() => handleButtonClick("inspiration")}>Inspiration</button>
+            <button
+              className="standardbutton"
+              onClick={() => handleButtonClick("all")}
+            >
+              All
+            </button>
+            <button
+              className="standardbutton"
+              onClick={() => handleButtonClick("recent")}
+            >
+              Recent
+            </button>
+            <button
+              className="standardbutton"
+              onClick={() => handleButtonClick("celly")}
+            >
+              Celebration
+            </button>
+            <button
+              className="standardbutton"
+              onClick={() => handleButtonClick("thanks")}
+            >
+              Thank You
+            </button>
+            <button
+              className="standardbutton"
+              onClick={() => handleButtonClick("inspiration")}
+            >
+              Inspiration
+            </button>
           </div>
           <input
             type="text"
+            style={{width:"400px"}}
             placeholder="Search boards..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="search-input"
           />
-          <button className="standardbutton" onClick={openModal}>New Board</button>
+          <button className="standardbutton" onClick={openModal}>
+            New Board
+          </button>
         </div>
         {isModalOpen && <NewCardModal closeModal={closeModal} />}
         <CardList sortoption={sortMethod} searchQuery={searchQuery} />

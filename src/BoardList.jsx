@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect, useMemo } from "react";
 import MakeCard from "./makecard.jsx";
 import "./global.css";
 import { fetchAllBoards } from "./dbcalls.jsx";
@@ -19,32 +18,31 @@ const CardList = ({ sortoption, searchQuery }) => {
     fetchBoards();
   }, []);
 
-  const filteredBoards = boards.filter((board) => {
-    const matchesSearch = board.title
-      .toLowerCase()
-      .includes(searchQuery.toLowerCase());
-    if (sortoption === "thanks") {
-      return matchesSearch && board.type === "Thank You";
-    }
-
-    if (sortoption === "celly") {
-      return matchesSearch && board.type === "Celebration";
-    }
+  const filteredAndSortedBoards = useMemo(() => {
+    let filteredBoards = boards.filter((board) => {
+      const matchesSearch = board.title.toLowerCase().includes(searchQuery.toLowerCase());
+      if (sortoption === "thanks") {
+        return matchesSearch && board.type === "Thank You";
+      }
+      if (sortoption === "celly") {
+        return matchesSearch && board.type === "Celebration";
+      }
+      if (sortoption === "inspiration") {
+        return matchesSearch && board.type === "Inspiration";
+      }
+      return matchesSearch;
+    });
 
     if (sortoption === "recent") {
-      return matchesSearch && board.type === "Recent";
+      filteredBoards = filteredBoards.sort((a, b) => b.boardid - a.boardid);
     }
 
-    if (sortoption === "inspiration") {
-      return matchesSearch && board.type === "Inspiration";
-    }
-
-    return matchesSearch;
-  });
+    return filteredBoards;
+  }, [boards, sortoption, searchQuery]);
 
   return (
     <div id="listofcards">
-      {filteredBoards.map((board) => (
+      {filteredAndSortedBoards.map((board) => (
         <MakeCard
           key={board.boardid}
           boardsid={board.boardid}
