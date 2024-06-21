@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-//test
+//test2
 import { useNavigate } from "react-router-dom";
 import {
   fetchAllCards,
@@ -27,7 +27,7 @@ const MakeCard = (props) => {
 
     setTimeout(async () => {
       window.location.reload();
-    }, 1200);
+    }, 1500);
   };
 
   const viewBoard = (event) => {
