@@ -15,15 +15,18 @@ const MakeInnerCard = ({ card }) => {
 
   const deleteButtonClick = (event) => {
     event.stopPropagation();
-    deleteCard(card.cardid);
-    window.location.reload();
+
+    setTimeout(async () => {
+      await deleteCard(card.cardid);
+      window.location.reload();
+    }, 400);
   };
 
   const likeclick = async (event) => {
     event.stopPropagation();
     const newLikes = likes + 1;
     await addLikeToCard(card.cardid, newLikes);
-    setLikes(newLikes); 
+    setLikes(newLikes);
   };
 
   return (

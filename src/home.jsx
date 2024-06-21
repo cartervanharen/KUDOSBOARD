@@ -4,8 +4,9 @@ import CardList from "./BoardList.jsx";
 import NewCardModal from "./newboardmodal.jsx";
 
 function Home() {
-  const [SortMethod, setSortMethod] = useState("");
+  const [sortMethod, setSortMethod] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleButtonClick = (sortMethod) => {
     setSortMethod(sortMethod);
@@ -20,43 +21,23 @@ function Home() {
         <div id="mainheader">
           <h1 id="headertext">KUDOBOARD</h1>
           <div>
-            <button
-              className="standardbutton"
-              onClick={() => handleButtonClick("all")}
-            >
-              All
-            </button>
-            <button
-              className="standardbutton"
-              onClick={() => handleButtonClick("recent")}
-            >
-              Recent
-            </button>
-            <button
-              className="standardbutton"
-              onClick={() => handleButtonClick("celly")}
-            >
-              Celebration
-            </button>
-            <button
-              className="standardbutton"
-              onClick={() => handleButtonClick("thanks")}
-            >
-              Thank You
-            </button>
-            <button
-              className="standardbutton"
-              onClick={() => handleButtonClick("inspiration")}
-            >
-              Inspiration
-            </button>
+            <button className="standardbutton" onClick={() => handleButtonClick("all")}>All</button>
+            <button className="standardbutton" onClick={() => handleButtonClick("recent")}>Recent</button>
+            <button className="standardbutton" onClick={() => handleButtonClick("celly")}>Celebration</button>
+            <button className="standardbutton" onClick={() => handleButtonClick("thanks")}>Thank You</button>
+            <button className="standardbutton" onClick={() => handleButtonClick("inspiration")}>Inspiration</button>
           </div>
-          <button className="standardbutton" onClick={openModal}>
-            New Board
-          </button>
+          <input
+            type="text"
+            placeholder="Search boards..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="search-input"
+          />
+          <button className="standardbutton" onClick={openModal}>New Board</button>
         </div>
         {isModalOpen && <NewCardModal closeModal={closeModal} />}
-        <CardList sortoption={SortMethod} />
+        <CardList sortoption={sortMethod} searchQuery={searchQuery} />
       </div>
     </>
   );
