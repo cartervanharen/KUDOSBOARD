@@ -8,11 +8,11 @@ datasource db {
 }
 
 model Users {
-  userid Int     @id @default(autoincrement())
-  username   String @default("guest")
-  password String @default("guest")
-  cards  Card[]
-  boards Board[]
+  userid   Int     @id @default(autoincrement())
+  username String  @default("guest")
+  password String  @default("guest")
+  cards    Card[]
+  boards   Board[]
 }
 
 model Board {
@@ -27,16 +27,22 @@ model Board {
 }
 
 model Card {
-  cardid  Int @id @default(autoincrement())
-  userId  Int
-  boardId Int
-
+  cardid          Int       @id @default(autoincrement())
+  userId          Int
+  boardId         Int
   cardtitle       String
   carddescription String
   image           String
-  likes Int
-  
+  likes           Int
+  user            Users     @relation(fields: [userId], references: [userid]) //many to 1
+  Board           Board     @relation(fields: [boardId], references: [boardid])
+  comments        Comment[] 
+}
 
-  user  Users @relation(fields: [userId], references: [userid]) //many to 1
-  Board Board @relation(fields: [boardId], references: [boardid])
+model Comment { 
+  commentid Int    @id @default(autoincrement())
+  cardid    Int   
+  comment   String
+
+  card Card @relation(fields: [cardid], references: [cardid]) 
 }

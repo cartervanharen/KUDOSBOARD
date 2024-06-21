@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { deleteCard, getLikesFromCard, addLikeToCard } from "./dbcalls";
+import { deleteCard, getLikesFromCard, addLikeToCard,getCommentsByCardId } from "./dbcalls";
+import CardModal from './commentmodal.jsx';
 
 const MakeInnerCard = ({ card }) => {
   const [likes, setLikes] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const fetchLikes = async () => {
@@ -29,8 +31,13 @@ const MakeInnerCard = ({ card }) => {
     setLikes(newLikes);
   };
 
+  const handleCardClick = () => {
+    setShowModal(true);
+  };
+
+
   return (
-    <div className="gridcardinboard" key={card.cardid}>
+    <div className="gridcardinboard" key={card.cardid} onClick={handleCardClick}>
       <h3 className="carddiscrip">{card.cardtitle}</h3>
       <p className="carddiscrip">{card.carddescription}</p>
       <p>Likes: {likes}</p>
@@ -43,6 +50,7 @@ const MakeInnerCard = ({ card }) => {
           Delete
         </button>
       </div>
+      {showModal && <CardModal card={card} onClose={() => setShowModal(false)} />}
     </div>
   );
 };

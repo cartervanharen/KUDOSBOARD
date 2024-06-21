@@ -192,7 +192,33 @@ const addLikeToCard = async (cardId, newLikeCount) => {
   }
 };
 
+
+
+
+const addComment = async (cardId, text) => {
+  try {
+    const response = await axios.post(`http://localhost:3001/cards/${cardId}/comments`, { text });
+    console.log("Comment added:", response.data);
+  } catch (error) {
+    console.error("Error adding comment:", error);
+  }
+};
+
+
+const getCommentsByCardId = async (cardId) => {
+  try {
+    const response = await axios.get(`http://localhost:3001/cards/${cardId}/comments`);
+    console.log("Comments retrieved:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching comments:", error);
+  }
+};
+
+
 export {
+  addComment,
+  getCommentsByCardId,
   fetchAllCards,
   fetchAllBoards,
   deleteAllCardsFromBoard,

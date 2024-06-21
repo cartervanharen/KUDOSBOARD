@@ -263,6 +263,52 @@ app.get("/boards/:boardId/cards", async (req, res) => {
   }
 });
 
+
+
+app.post("/cards/:id/comments", async (req, res) => {
+  const { id } = req.params;
+  const { text } = req.body;
+
+  if (!text) {
+    return res.status(400).json({ error: "Comment text is required" });
+  }
+
+  try {
+    const cardExists = await prisma.card.findUnique({
+      where: { cardid: parseInt(id) },
+    });
+
+    if (!cardExists) {
+      return res.status(404).json({ error: "Card not found" });
+    }
+
+    const comment = await prisma.comment.create({
+      data: {
+        comment: text,
+        cardid: parseInt(id),
+      },
+    });
+    res.json(comment);
+  } catch (error) {
+    console.error("Failed to add comment:", error);
+    res.status(500).json({ error: "Failed to add comment", details: error });
+  }
+});
+    
+
+app.get("/cards/:cardId/comments", async (req, res) => {
+  const { cardId } = req.params;
+
+  try {
+    const comments = await prisma.comment.findMany({
+      where: { cardid: parseInt(cardId) }, 
+    });
+    res.json(comments);
+  } catch (error) {
+    console.error("Failed to fetch comments:", error);
+    res.status(500).json({ error: "Failed to fetch comments", details: error.message });
+  }
+});
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
