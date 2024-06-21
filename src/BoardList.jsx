@@ -39,6 +39,7 @@ const CardList = ({ sortoption }) => {
   return (
     <>
       <div id="listofcards">
+        
         {boards.map((board) => (
           <MakeCard
             key={board.boardid} //completely useless but it gets rid of warnings

@@ -3,8 +3,11 @@ import React, { useState, useEffect } from "react";
 import CardModal from "./newcardmodal";
 import Makeinnercard from "./makeinnercard";
 import { getCardsFromBoardId } from "./dbcalls";
+import { useNavigate } from "react-router-dom";
 
 const Board = ({ board }) => {
+    const navigate = useNavigate();
+
   const [cards, setCards] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -24,9 +27,17 @@ const Board = ({ board }) => {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
+  const gohome = (event) => {
+    event.stopPropagation();
+    navigate('/'); 
+  };
+
   return (
     <div className="wholeboardpage">
+      <button onClick={gohome}>Home</button>
+
       <h1>{board.boardid}</h1>
+
       <p style={{ color: "black" }}>{board.type}</p>
       <p style={{ color: "black" }}>{board.userId}</p>
       <p style={{ color: "black" }}>{board.image}</p>
@@ -40,6 +51,7 @@ const Board = ({ board }) => {
           <p>No cards available for this board.</p>
         )}
       </div>
+
       {isModalOpen && (
         <CardModal closeModal={closeModal} boardId={board.boardid} />
       )}

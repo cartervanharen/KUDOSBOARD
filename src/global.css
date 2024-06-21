@@ -2,8 +2,8 @@
   background-color: gray;
 
   width: 100vw;
-  min-height: 300vw;
-  color: white;
+
+    color: white;
   margin: 0;
 }
 
@@ -186,6 +186,9 @@ input[type="text"] {
 }
 
 .wholeboardpage {
-  width: 100vp;
+  width: 100vw;
+
+  overflow-y: scroll;
+  height: 100%;
   background-color: pink;
 }
