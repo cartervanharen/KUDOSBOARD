@@ -54,7 +54,7 @@ function Home() {
           </div>
           <input
             type="text"
-            style={{width:"400px"}}
+            style={{ width: "400px" }}
             placeholder="Search boards..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -66,6 +66,10 @@ function Home() {
         </div>
         {isModalOpen && <NewCardModal closeModal={closeModal} />}
         <CardList sortoption={sortMethod} searchQuery={searchQuery} />
+      </div>
+
+      <div className="footer">
+        <p>This is a footer. - Carter VanHaren</p>
       </div>
     </>
   );

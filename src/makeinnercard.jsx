@@ -73,3 +73,5 @@ const MakeInnerCard = ({ card }) => {
 };
 
 export default MakeInnerCard;
+
+

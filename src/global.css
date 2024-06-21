@@ -1,8 +1,7 @@
 #wholepage {
-  background-color: gray;
-  height: 100%;
-  min-height: 100vw;
-  width: 100vw;
+  background-color: white;
+  height: 94vh; 
+   width: 100vw;
   color: white;
   overflow: scroll;
   margin: 0;
@@ -271,4 +270,11 @@ input[type="text"] {
 .commentbox{
   overflow: auto; 
   height: 100px;
+}
+
+
+.footer{
+  height: 30px;
+  color: pink;
+  background-color: black;
 }
