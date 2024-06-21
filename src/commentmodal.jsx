@@ -24,11 +24,11 @@ const CardModal = ({ card, onClose }) => {
       try {
         const addedComment = await addComment(card.cardid, newComment);
         if (addedComment && addedComment.comment) {
-          setComments(prevComments => [...prevComments, addedComment]);
+          setComments((prevComments) => [...prevComments, addedComment]);
           setNewComment("");
-          window.location.reload(); 
+          window.location.reload();
         } else {
-            window.location.reload(); 
+          window.location.reload();
         }
       } catch (error) {
         console.error("Failed to add comment:", error);
@@ -49,16 +49,19 @@ const CardModal = ({ card, onClose }) => {
   return (
     <div className="modal2" onClick={handleModalClick}>
       <div className="modal-content2" onClick={handleModalContentClick}>
-        <span className="close" onClick={onClose}>X</span>
+        <span className="close" onClick={onClose}>
+          X
+        </span>
         <h3>{card.cardtitle}</h3>
         <p>{card.carddescription}</p>
         <img src={card.image} alt={card.cardtitle} />
         <div>
-
-        <h3>Comments</h3>
+          <h3>Comments</h3>
 
           {comments.map((comment) => (
-            <p key={comment.commentid}>{comment.comment || "No comment text available"}</p>
+            <p key={comment.commentid}>
+              {comment.comment || "No comment text available"}
+            </p>
           ))}
           <input
             type="text"

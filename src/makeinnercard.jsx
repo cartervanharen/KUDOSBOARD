@@ -23,11 +23,11 @@ const MakeInnerCard = ({ card }) => {
     event.stopPropagation();
     await deleteCard(card.cardid);
 
-    console.log(card.cardid)
+    console.log(card.cardid);
 
-    // setTimeout(async () => {
-    //   window.location.reload();
-    // }, 1500);
+    setTimeout(async () => {
+      window.location.reload();
+    }, 100);
   };
 
   const likeClick = async (event) => {
@@ -50,14 +50,22 @@ const MakeInnerCard = ({ card }) => {
   };
 
   return (
-    <div className="gridcardinboard" key={card.cardid} onClick={handleCardClick}>
+    <div
+      className="gridcardinboard"
+      key={card.cardid}
+      onClick={handleCardClick}
+    >
       <h3 className="carddiscrip">{card.cardtitle}</h3>
       <p className="carddiscrip">{card.carddescription}</p>
       <p>Likes: {likes}</p>
       <img src={card.image} alt={card.cardtitle} className="cardimage" />
       <div>
-        <button className="standardbutton" onClick={likeClick}>Like</button>
-        <button className="standardbutton" onClick={deleteButtonClick}>Delete</button>
+        <button className="standardbutton" onClick={likeClick}>
+          Like
+        </button>
+        <button className="standardbutton" onClick={deleteButtonClick}>
+          Delete
+        </button>
       </div>
       {showModal && <CardModal card={card} onClose={handleCloseModal} />}
     </div>
