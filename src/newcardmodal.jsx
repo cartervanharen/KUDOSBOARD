@@ -74,6 +74,16 @@ const CardModal = ({ closeModal, boardId }) => {
               onChange={handleChange}
             />
           </div>
+
+          <div>
+            <label>Author : </label>
+            <input
+              type="author"
+              id="author"
+              name="author"
+            />
+          </div>
+
           <div>
             <label htmlFor="carddescription">Description: </label>
             <input
@@ -108,6 +118,9 @@ const CardModal = ({ closeModal, boardId }) => {
               />
             ))}
           </div>
+
+
+
           <div>
             <label htmlFor="image">Image URL: </label>
             <input
@@ -119,6 +132,8 @@ const CardModal = ({ closeModal, boardId }) => {
               onChange={handleChange}
             />
           </div>
+
+         
           <button type="submit">Create Card</button>
         </form>
       </div>

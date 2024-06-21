@@ -79,6 +79,18 @@ const Modal = ({ closeModal }) => {
             />
           </div>
 
+
+
+          <div>
+            <label>Author : </label>
+            <input
+              type="author"
+              id="author"
+              name="author"
+            />
+          </div>
+
+          
           <div>
             <label htmlFor="search">Search Giphy: </label>
             <input
